@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import org.xml.sax.SAXException;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -11,6 +12,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.plaf.ColorUIResource;
+import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.FileNotFoundException;
@@ -284,10 +286,10 @@ public class ControlPanel extends JFrame
                         }
                     JsonWriter writer;
                     try {
-                        writer=new JsonWriter(new FileWriter("D:\\mohye\\IdeaProjects\\IAudit-Control-Swing\\src\\main\\resources\\JSON\\Patterns.json"));
+                        writer=new JsonWriter(new FileWriter(Utils.getSettings("Path_to_save")));
                         gson.toJson(allPaterns,listType,writer);
                         writer.close();
-                    } catch (IOException e) {
+                    } catch (IOException | ParserConfigurationException | SAXException e) {
                         e.printStackTrace();
                     }
                     ViewPatterns();
